@@ -287,4 +287,6 @@ def admin_recommend_restore(editor_key, hid):
         return redirect(url_for("admin_recommend"))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))   # ดึงค่า PORT จาก Render หรือใช้ 5000 ตอนรันในเครื่อง
+    app.run(host="0.0.0.0", port=port, debug=True)
+
