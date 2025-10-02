@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ภาวะซึมเศร้าและแนวทางป้องกัน</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styleinfo.css') }}">
+</head>
+<body>
+  <main class="info-page">
+    <div class="info-card">
+      <!-- เนื้อหาที่ admin ป้อน -->
+      <div class="info-content">
+        {{ content|safe }}
+      </div>
+
+      <div class="actions center">
+        <a href="{{ url_for('home') }}" class="btn-flat">ย้อนกลับ</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

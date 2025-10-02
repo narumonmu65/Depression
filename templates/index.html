@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ตรวจเช็คภาวะซึมเศร้า</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-mark"></span> Mental Health Check
+      </div>
+      <nav class="nav-links">
+        <a href="{{ url_for('login') }}" class="btn soft">เข้าสู่ระบบ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid container--wide">
+      <div>
+        <h1 class="h1">
+          ตรวจเช็คภาวะซึมเศร้า <br>
+          <span class="accent">ในนักศึกษา</span>
+        </h1>
+        <p class="lead">
+          มาตรวจสอบความเครียดและความเสี่ยงที่จะเกิดภาวะซึมเศร้าของคุณผ่านการประเมิน
+        </p>
+        <div class="hero-cta">
+          <!-- ปุ่มต้องไป route จริง -->
+          <a href="{{ url_for('assess') }}" class="btn primary">เริ่มทำแบบประเมิน</a>
+          <a href="{{ url_for('info') }}" class="btn ghost">ความรู้เกี่ยวกับโรคซีมเศร้า</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <img src="{{ url_for('static', filename='images/hero-image.png') }}"
+             alt="การให้คำปรึกษา" class="hero-thumb">
+      </div>
+    </div>
+  </section>
+
+  <div class="hero-bottom"></div>
+</body>
+</html>

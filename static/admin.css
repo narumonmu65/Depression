@@ -1,0 +1,181 @@
+body {
+  margin: 0;
+  font-family: system-ui, "Noto Sans Thai", sans-serif;
+  background: #fff;
+  color: #1f2937;
+}
+
+/* top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background: #f3e8ff;
+  border-bottom: 2px solid #e9d5ff;
+}
+.topbar .brand {
+  font-weight: 800;
+  font-size: 20px;
+  color: #4c1d95;
+}
+.top-actions a {
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.btn.ghost {
+  background: #ede9fe;
+  color: #4c1d95;
+}
+
+/* hero */
+.admin-main {
+  padding: 60px;
+}
+.admin-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+.hero-text h1 {
+  font-size: 38px;
+  margin: 0 0 16px;
+}
+.hero-text .highlight {
+  color: #7c3aed;
+}
+.hero-text p {
+  margin-bottom: 20px;
+}
+.btn.primary {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.hero-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.history-wrap{
+  margin-top: 28px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+.history-title{
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #1f2937;
+}
+.table-scroll{ overflow:auto; border-radius: 14px; box-shadow: 0 10px 20px rgba(124,58,237,.08); }
+.history-table{
+  width:100%;
+  border-collapse: collapse;
+  background:#fff;
+}
+.history-table th, .history-table td{
+  padding: 12px 14px;
+  border-bottom: 1px solid #f2f2f2;
+  vertical-align: top;
+  font-size: 14px;
+}
+.history-table thead th{ background:#f6f1ff; color:#4c1d95; font-weight:800; }
+.history-table .preview{ color:#374151; }
+.history-table .actions{ white-space: nowrap; }
+.history-table .btn {
+  display: inline-block;
+  margin: 0 auto;       /* กึ่งกลางภายใน cell */
+}
+.history-table .btn.primary{ background:linear-gradient(90deg,#7c3aed,#a78bfa); color:#fff; }
+.history-table .btn.ghost{ background:#ede9fe; color:#4c1d95; margin-right:6px; }
+.muted{ color:#9ca3af; }
+
+/* โครงสร้างปุ่ม */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px; /* เว้นระยะระหว่างปุ่ม */
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 15px;
+}
+
+/* ปุ่มหลัก */
+.btn.primary {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  color: #fff;
+  border: none;
+}
+
+.btn.primary:hover {
+  background: linear-gradient(90deg, #6d28d9, #8b5cf6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25);
+}
+
+/* ปุ่มรอง (ghost) */
+.btn.ghost {
+  background: #f3e8ff;
+  color: #6d28d9;
+  border: 2px solid #c4b5fd;
+}
+
+.btn.ghost:hover {
+  background: #ede9fe;
+  color: #4c1d95;
+  transform: translateY(-2px);
+}
+
+/* ทำให้ปุ่มดู responsive */
+@media (max-width: 640px) {
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+history-table td.actions {
+  display: flex;
+  justify-content: center; /* จัดตรงกลางแนวนอน */
+  align-items: center;     /* จัดตรงกลางแนวตั้ง */
+  height: 100%;            /* เต็มความสูง cell */
+}
+
+/* ปุ่มกู้คืน */
+.history-table td.actions .btn {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.history-table td.actions .btn:hover {
+  background: linear-gradient(90deg, #6d28d9, #8b5cf6);
+  transform: scale(1.05);
+}

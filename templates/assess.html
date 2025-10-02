@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ทำแบบทดสอบภาวะซึมเศร้า</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    /* เผื่อยังไม่มีสไตล์ใน styles.css */
+    .recommend-box{margin-top:16px;padding:16px;background:#f8f5ff;border-radius:12px;line-height:1.75}
+    .result-safe .recommend-box{background:#f5fff7}
+    .result-risk .recommend-box{background:#fff5f5}
+    .admin-edit-actions{margin-top:14px;display:flex;gap:10px;justify-content:center}
+    .btn-link{color:#6d28d9;text-decoration:underline;font-weight:700}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <span style="font-weight:800">Mental Health Check</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- พื้นที่ทำแบบทดสอบ -->
+  <main class="assess">
+  
+  <!-- ✅ ข้อความแสดงเฉพาะด้านบนของคำถามแรก -->
+
+
+  <!-- Step 1 -->
+  <div class="card step" data-step="0">
+    <p class="assessment-intro">
+  โปรดเลือกคำตอบในแต่ละข้อ และตอบจนจบทุกคำถาม เพื่อรับผลการประเมิน
+  </p>
+    <div class="title">นักเรียนเคยมีความคิดฆ่าตัวตายหรือไม่</div>
+    <div class="choices" data-field="suicidal">
+      <button class="choice" data-value="Yes">เคย</button>
+      <button class="choice" data-value="No">ไม่เคย</button>
+    </div>
+    <div class="actions">
+      <button class="btn-flat next">ต่อไป</button>
+    </div>
+  </div>
+
+    <!-- Step 2 -->
+    <div class="card step hidden" data-step="1">
+      <div class="title">ระดับความกดดันที่นักเรียนเผชิญในการเรียน</div>
+      <div class="choices" data-field="study_stress">
+        <button class="choice" data-value="Low">ต่ำ (ระดับ 1–2)</button>
+        <button class="choice" data-value="Medium">ปานกลาง (ระดับ 3)</button>
+        <button class="choice" data-value="High">สูง (ระดับ 4–5)</button>
+      </div>
+      <p class="summary">หมายเหตุ: ระดับความกดดันเริ่มตั้งแต่ 1–5</p>
+      <div class="actions">
+        <button class="btn-flat prev">ย้อนกลับ</button>
+        <button class="btn-flat next">ต่อไป</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="card step hidden" data-step="2">
+      <div class="title">ระดับความเครียดที่เกิดจากปัญหาทางการเงิน</div>
+      <div class="choices" data-field="finance_stress">
+        <button class="choice" data-value="Low">ต่ำ (ระดับ 1–2)</button>
+        <button class="choice" data-value="High">สูง (ระดับ 3–5)</button>
+      </div>
+      <p class="summary">หมายเหตุ: ระดับความเครียดทางการเงินเริ่มตั้งแต่ 1–5</p>
+      <div class="actions">
+        <button class="btn-flat prev">ย้อนกลับ</button>
+        <button class="btn-flat next">ต่อไป</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card step hidden" data-step="3">
+      <div class="title">อายุ</div>
+      <div class="choices" data-field="age_group">
+        <button class="choice" data-value="A">A (อายุ 18–23)</button>
+        <button class="choice" data-value="B">B (อายุ 35–59)</button>
+      </div>
+      <div class="actions">
+        <button class="btn-flat prev">ย้อนกลับ</button>
+        <button class="btn-flat next">ต่อไป</button>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card step hidden" data-step="4">
+      <div class="title">ชั่วโมงเฉลี่ยต่อวันที่ใช้ไปกับการเรียนหรือทำงาน</div>
+      <div class="choices" data-field="work_hours">
+        <button class="choice" data-value="0-6">0–6 ชั่วโมงต่อวัน</button>
+        <button class="choice" data-value="7-12">7–12 ชั่วโมงต่อวัน</button>
+      </div>
+      <div class="actions">
+        <button class="btn-flat prev">ย้อนกลับ</button>
+        <button class="btn-flat next">ต่อไป</button>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="card step hidden" data-step="5">
+      <div class="title">ระดับความพึงพอใจของนักเรียนต่อการเรียนของตน</div>
+      <div class="choices" data-field="satisfaction">
+        <button class="choice" data-value="Low">ต่ำ (ระดับ 1–2)</button>
+        <button class="choice" data-value="Medium">ปานกลาง (ระดับ 3)</button>
+        <button class="choice" data-value="High">สูง (ระดับ 4–5)</button>
+      </div>
+      <p class="summary">หมายเหตุ: ระดับความพึงพอใจเริ่มตั้งแต่ 1–5</p>
+      <div class="actions">
+        <button class="btn-flat prev">ย้อนกลับ</button>
+        <button class="btn-flat next">ต่อไป</button>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="card step hidden" data-step="6">
+      <div class="title">พฤติกรรมการรับประทานอาหารและโภชนาการของนักเรียน</div>
+      <div class="choices" data-field="diet">
+        <button class="choice" data-value="Good">ดี (ครบ 5 หมู่/สมดุล)</button>
+        <button class="choice" data-value="Average">ปานกลาง</button>
+        <button class="choice" data-value="Poor">ไม่ค่อยดีต่อสุขภาพ</button>
+      </div>
+      <div class="actions">
+        <button class="btn-flat prev">ย้อนกลับ</button>
+        <button class="btn-flat finish">ประเมิน</button>
+      </div>
+    </div>
+
+    <!-- Result: ไม่เสี่ยง -->
+    <div id="result-safe" class="hidden card result-safe">
+      <h2 class="safe-title">
+        คุณ<span class="accent-green">ไม่มี</span>ความเสี่ยงเป็นภาวะซึมเศร้า
+      </h2>
+
+      <div class="safe-figure">
+        <img src="{{ url_for('static', filename='images/ok.jpg') }}" alt="">
+      </div>
+
+      
+
+      <div class="actions center">
+        <a href="{{ url_for('home') }}" class="btn-flat btn-lg">เสร็จสิ้น</a>
+      </div>
+    </div>
+
+    <!-- Result: เสี่ยง -->
+    <div id="result-risk" class="hidden card result-risk">
+      <div class="result-grid">
+        <div class="result-text">
+          <h2 class="risk-title">คุณมี<span class="accent-red">ความเสี่ยง</span>เป็นภาวะซึมเศร้า</h2>
+        </div>
+        <div class="result-image">
+          <img src="{{ url_for('static', filename='images/RED.png') }}" alt="depression advice">
+        </div>
+      </div>
+
+      <!-- ✅ ข้อความคำแนะนำที่แอดมินแก้ไขได้ -->
+      <div class="recommend-box">
+        {{ risk_text|safe }}
+      </div>
+
+      <!-- แสดงปุ่มแก้ไขเฉพาะคนที่เป็นแอดมิน -->
+      {% if session.get('is_admin') %}
+      <div class="admin-edit-actions">
+        <a class="btn-link" href="{{ url_for('admin_recommend_risk') }}">แก้ไขคำแนะนำ (กรณีเสี่ยง)</a>
+      </div>
+      {% endif %}
+
+      <div class="actions center">
+        <a href="{{ url_for('home') }}" class="btn-flat">เสร็จสิ้น</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ---- จัดการขั้นตอนแบบทีละหน้า ----
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const answers = {};
+    let current = 0;
+
+    // คลิกตัวเลือก
+    document.querySelectorAll('.choices').forEach(group => {
+      group.addEventListener('click', (e) => {
+        const btn = e.target.closest('.choice');
+        if(!btn) return;
+        group.querySelectorAll('.choice').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        const field = group.dataset.field;
+        answers[field] = btn.dataset.value;
+      });
+    });
+
+    // ปุ่มควบคุม
+    document.addEventListener('click', (e) => {
+      if(e.target.matches('.next')) next();
+      if(e.target.matches('.prev')) prev();
+      if(e.target.matches('.finish')) finish();
+    });
+
+    function next(){
+      const ok = requireAnswered(current);
+      if(!ok) return;
+      goTo(current + 1);
+    }
+
+    function prev(){
+      goTo(current - 1);
+    }
+
+    function goTo(idx){
+      if(idx < 0 || idx >= steps.length) return;
+      steps[current].classList.add('hidden');
+      steps[idx].classList.remove('hidden');
+      current = idx;
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function requireAnswered(stepIdx){
+      const field = steps[stepIdx].querySelector('.choices').dataset.field;
+      if(!answers[field]){
+        alert('กรุณาเลือกคำตอบก่อน');
+        return false;
+      }
+      return true;
+    }
+
+    // ---- ตรรกะตัดสินใจแบบย่อ ----
+    function predict(a){
+      if(a.suicidal === "Yes") return "yes";
+      if(a.study_stress === "High" && (a.satisfaction === "Low" || a.satisfaction === "Medium")) return "yes";
+      if(a.finance_stress === "High" && a.work_hours === "7-12") return "yes";
+      if(a.diet === "Poor" && (a.study_stress === "Medium" || a.finance_stress === "High")) return "yes";
+      return "no";
+    }
+
+    function finish(){
+      const ok = requireAnswered(current);
+      if(!ok) return;
+      steps.forEach(s => s.classList.add('hidden'));
+      const risk = predict(answers);
+      if(risk === "yes"){
+        document.getElementById('result-risk').classList.remove('hidden');
+      }else{
+        document.getElementById('result-safe').classList.remove('hidden');
+      }
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

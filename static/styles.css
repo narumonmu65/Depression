@@ -1,0 +1,353 @@
+/* styles.css */
+:root{
+  --bg:#f3edfc; --ink:#1f2937; --muted:#6b7280;
+  --pill:#ffffff; --hl:#d8b4fe; --pri:#7c3aed; --pri2:#a78bfa; --btn:#7c3aed;
+  --radius:18px;
+  --header-h:72px;   /* ← ความสูง Header ที่ตรึง */
+  --bar-h:10%;      /* ← ความสูงแถบม่วงด้านล่าง */
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,"Noto Sans Thai","Prompt",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+
+/* Desktop: ไม่ให้เลื่อนเพื่อไม่ตกเฟรม */
+@media (min-width: 900px){
+  html, body { overflow: hidden; }
+}
+
+/* Container */
+.container { max-width: 1280px; padding: 0 32px; margin:0 auto; }
+.container--wide { max-width: 1440px; }
+
+/* Header (ตรึงด้านบน) */
+.header{
+  position: fixed;
+  top:0; left:0; right:0;
+  height: var(--header-h);
+  background: transparent;
+  z-index: 10;
+}
+.nav{
+  height: 100%;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.brand{font-weight:800; display:flex; align-items:center; gap:10px;}
+.brand-mark{display:inline-block;width:10px;height:10px;background:#7c3aed;border-radius:50%}
+.nav-links a{margin-left:12px}
+.profile-btn img{width:36px;height:36px;border-radius:50%;border:2px solid #e9d5ff}
+
+/* ======= HERO (Full Screen & No Scroll) ======= */
+/* คำนวณความสูง: เต็มจอ - แถบม่วงล่าง + เผื่อ header ที่ fix ด้วย padding-top */
+.hero{
+  min-height: calc(100vh - var(--bar-h));
+  padding-top: var(--header-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:#fff;
+  position: relative;
+}
+.hero-grid{
+  flex: 1;
+  display:grid;
+  grid-template-columns: 1fr 1fr;   /* ซ้าย-ขวา เท่ากัน */
+  gap:40px;
+  align-items:center;
+}
+.h1{
+  font-size: clamp(40px, 4.5vw, 64px);
+  line-height: 1.15;
+  margin:0 0 12px 0;
+}
+.lead{
+  color:var(--muted);
+  font-size: clamp(16px, 1.2vw, 20px);
+  margin:0 0 24px 0;
+}
+.hero-card{display:flex;justify-content:center}
+.hero-thumb{
+  width: clamp(380px, 42vw, 560px); /* ภาพใหญ่ขึ้นและยืดหยุ่น */
+  height:auto;
+  display:block;
+  border-radius:12px;
+  box-shadow:0 8px 26px rgba(124,58,237,.12);
+}
+
+/* แถบม่วงล่าง (ล็อคความสูง) */
+.hero-bottom{
+  width:100%;
+  height: var(--bar-h);
+  background:#c4b5fd;
+  border-top:1px solid #e9d5ff;
+}
+
+/* ปุ่ม */
+.btn{
+  display:inline-block;border:none;padding:10px 18px;border-radius:999px;
+  cursor:pointer;text-decoration:none;font-weight:700
+}
+.btn.primary{background:linear-gradient(90deg,var(--pri),var(--pri2));color:#fff}
+.btn.soft{background:linear-gradient(90deg,var(--pri),var(--pri2));color:#fff}
+.btn.ghost{background:#e9d5ff;color:#4c1d95}
+.hero .btn{ padding:12px 20px; margin-right:12px }
+
+/* ======= Cards / Steps (หน้าแบบทดสอบ) ======= */
+.card{background:#fff;border-radius:var(--radius);box-shadow:0 10px 30px rgba(124,58,237,.12);padding:22px;margin:20px auto;max-width:760px}
+.title{background:#d8b4fe;border-radius:14px;padding:14px 16px;text-align:center;font-weight:800}
+.choices{display:grid;gap:12px;margin:14px 0}
+.choice{background:#fff;color:#5b21b6;border:0;padding:12px 16px;border-radius:999px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.choice.active{outline:3px solid var(--pri2);background:#efe7ff}
+.actions{display:flex;justify-content:center;gap:12px;margin-top:12px}
+.btn-flat {
+  background: linear-gradient(90deg, var(--pri), var(--pri2));
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;  /* ✅ เอาขีดใต้ตัวหนังสือออก */
+  display: inline-block;  /* ✅ ทำให้ปุ่มเป็น block กดได้ทั้งพื้นที่ */
+}
+.hidden{display:none}
+.result h2{margin-top:0}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:#efe2ff;color:#5b21b6;font-weight:700}
+.summary{line-height:1.8}
+.center{display:flex;justify-content:center}
+
+.assess{
+  min-height: calc(100vh - var(--bar-h, 0px));
+  padding-top: var(--header-h, 72px);
+  display: grid;
+  place-items: center;
+  padding-left: 16px; padding-right: 16px;
+  background: var(--bg);
+}
+
+/* ปรับขนาดการ์ดให้สมส่วนกว้างขึ้น */
+.card.step{
+  width: min(920px, 92vw);
+  padding: 26px 28px;
+  margin: 0;  /* ใช้ grid จัดกลางแล้ว */
+  background:#fff;
+  border-radius: var(--radius);
+  box-shadow: 0 14px 40px rgba(124,58,237,.12);
+}
+
+/* หัวข้อคำถามเด่นอ่านง่าย */
+.card.step .title{
+  background:#e9d5ff;
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+  font-weight:800;
+  font-size: clamp(16px, 1.6vw, 18px);
+}
+
+/* ตัวเลือกเต็มความกว้าง */
+.card.step .choices{ display:grid; gap:12px; margin:18px 0; }
+.card.step .choice{
+  width:100%;
+  padding:14px 18px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:16px;
+  color:#5b21b6;
+  background:#fff;
+  border:0;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+  cursor:pointer;
+}
+.card.step .choice:hover{ filter:brightness(.98); }
+.card.step .choice.active{ outline:3px solid var(--pri2); background:#efe7ff; }
+
+/* ปุ่มต่อไป/ย้อนกลับ */
+.card.step .actions{ display:flex; justify-content:center; gap:12px; margin-top:14px; }
+.card.step .btn-flat{ padding:12px 22px; }
+
+.risk-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap; /* ป้องกันตัดบรรทัด */
+}
+.risk-title .accent-red {
+  color: red;
+}
+
+.result-risk .result-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr; /* ซ้ายใหญ่ ขวาเล็ก */
+  gap: 24px;
+  align-items: center;
+}
+
+.result-risk .result-text h2 {
+  margin-top: 0;
+  font-size: clamp(22px, 2.4vw, 28px);
+}
+
+.result-risk .accent-red {
+  color: #b91c1c;
+  font-weight: 800;
+}
+
+.result-risk .summary {
+  line-height: 1.8;
+  margin: 14px 0 20px;
+}
+
+.result-risk .result-image img {
+  max-width: 280px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.result-safe,
+.result-risk{
+  width: min(1100px, 92vw);
+  border-radius: 26px;
+  padding: clamp(24px, 3vw, 36px);
+  margin: 0 auto;               /* จัดกลางแนวนอน */
+  text-align: center;
+}
+
+/* หัวเรื่อง */
+.safe-title{
+  margin: 0 0 12px;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 800;
+}
+.accent-green{ color:#16a34a; font-weight: 900; }
+
+/* รูปภาพกลางการ์ด */
+.safe-figure img{
+  width: min(420px, 60vw);
+  height: auto;
+  display: block;
+  margin: clamp(18px, 3vw, 28px) auto;
+}
+
+/* ปุ่มใหญ่ */
+.btn-flat.btn-lg{
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 999px;
+}
+
+.login-card{
+  width: min(560px, 92vw);
+  background:#fff;
+  border-radius: 28px;
+  box-shadow: 0 18px 48px rgba(124,58,237,.12);
+  padding: 0; /* เอา padding ไปจัดการข้างใน */
+  overflow:hidden;
+  margin: 18px auto 24px;
+}
+
+.login-card .title{
+  background:#d8b4fe;       /* พื้นหลังม่วง */
+  color:#111;               /* สีตัวอักษร */
+  text-align:center;
+  font-size: clamp(20px, 2.4vw, 24px);
+  font-weight: 800;
+  padding:16px;
+  margin:0;
+}
+
+.login-card form{
+  padding: clamp(22px, 3vw, 32px);
+}
+
+/* ฟิลด์ */
+.field{ position:relative; display:block; margin: 22px 0; }
+.field .label{ display:block; font-size:14px; color:var(--muted); margin-bottom:6px; }
+.field input{
+  width:100%; border:none; outline:none; background:transparent;
+  padding:10px 36px 10px 0; font-size:16px; color:var(--ink);
+}
+.field .bar{ display:block; width:100%; height:2px; background:#e5e7eb; }
+.field input:focus + .bar,
+.field input:not(:placeholder-shown) + .bar{
+  background: linear-gradient(90deg,var(--pri),var(--pri2));
+}
+
+.field .toggle{
+  position:absolute; right:0; bottom:10px;
+  border:none; background:transparent; cursor:pointer; color:#9ca3af;
+}
+
+.field .help{
+  position:absolute; right:0; top:0;
+  font-size:12px; color:#9ca3af; text-decoration:none;
+}
+.field .help:hover{ color:#6b7280; }
+
+/* ปุ่ม */
+.login-card .actions{ display:flex; justify-content:center; margin-top:12px; }
+.login-card .btn{
+  padding:12px 22px; border-radius:999px; font-weight:700; border:none; cursor:pointer;
+  background: linear-gradient(90deg,var(--pri),var(--pri2)); color:#fff;
+}
+.login-card .btn:hover{ filter:brightness(.98); }
+
+/* ข้อความด้านล่าง */
+.subtext{ text-align:center; color:var(--muted); font-size:14px; margin-top:14px; }
+.subtext a{ color:var(--pri); text-decoration:none; }
+.subtext a:hover{ text-decoration:underline; }
+
+
+
+
+/* จอเล็ก: สลับเป็นแนวตั้ง */
+@media (max-width: 900px){
+  .result-risk .result-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .result-risk .result-image img {
+    max-width: 220px;
+  }
+}
+
+.assessment-intro {
+  max-width: 900px;
+  margin: 0 auto 10px;   /* เอา margin-top ออก ให้ติดข้างบนการ์ด */
+  padding: 0 15px;
+  font-weight: 700;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.6;
+  text-align: center;
+  color: #1f1b2d;
+}
+
+/* พื้นที่แบบประเมิน */
+.assess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;   /* ไม่ต้องกลางทั้งหน้า ให้เริ่มจากบนลงล่าง */
+  gap: 0;                        /* เอาช่องว่างออก */
+}
+
+/* การ์ด */
+.assess .card {
+  width: 100%;
+  max-width: 700px;
+  margin-top: 0;                 /* ตัด margin บนออก */
+}
+
+/* (ถ้าต้องการเวอร์ชันจอเล็ก) */
+@media (max-width: 640px){
+  .assessment-intro{
+    margin: 32px auto 16px;
+    font-size: clamp(18px, 5vw, 26px);
+  }
+}

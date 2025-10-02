@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-card">
+      <h1 class="title">เข้าสู่ระบบ</h1>
+
+      <!-- Flash Message -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="{{ url_for('login') }}" method="post">
+        <!-- Email -->
+        <label class="field">
+          <span class="label">อีเมล</span>
+          <input type="email" name="email" placeholder="กรอกอีเมล" required>
+        </label>
+
+        <!-- Password -->
+        <label class="field">
+          <span class="label">รหัสผ่าน</span>
+          <input type="password" name="password" placeholder="กรอกรหัสผ่าน" required>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">เข้าสู่ระบบ</button>
+        </div>
+      </form>
+    </section>
+    
+  </main>
+</body>
+</html>

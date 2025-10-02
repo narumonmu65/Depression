@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>หน้าผู้ดูแลระบบ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Mental Health Check</div>
+    <nav class="top-actions">
+      <a href="{{ url_for('logout') }}" class="btn ghost">ออกจากระบบ</a>
+    </nav>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-hero">
+      <div class="hero-text">
+        <h1>ตรวจเช็คสภาวะซึมเศร้า <br><span class="highlight">ในนักศึกษา</span></h1>
+        <p>มาตรวจสอบความเครียดและความเสี่ยงที่จะเกิดภาวะซึมเศร้าของคุณผ่านการประเมิน</p>
+
+        <div class="actions">
+          <a class="btn primary" href="{{ url_for('admin_recommend') }}">เพิ่มความรู้เกี่ยวกับโรคซึมเศร้า</a>
+          <a class="btn ghost" href="{{ url_for('admin_recommend_risk') }}">แก้ไขคำแนะนำ (กรณีเสี่ยง)</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="{{ url_for('static', filename='images/hero-image.png') }}" alt="">
+      </div>
+    </div>
+  </main>
+</body>
+</html>

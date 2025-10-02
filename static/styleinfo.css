@@ -1,0 +1,81 @@
+:root {
+  --bg:#f3edfc; --ink:#1f2937; --pri:#7c3aed; --pri2:#a78bfa;
+  --radius:18px;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family: system-ui,"Noto Sans Thai","Prompt",sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ===== Info Page ===== */
+.info-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+}
+
+.info-card {
+  width: min(1100px, 92vw);
+  margin: 28px auto 24px;
+  background: #fff;
+  border-radius: 26px;
+  box-shadow: 0 18px 48px rgba(124,58,237,.12);
+  padding: clamp(20px, 3.2vw, 36px);
+}
+
+.info-title {
+  text-align: center;
+  font-size: clamp(24px, 3vw, 32px);
+  margin: 0 0 24px 0;
+  font-weight: 800;
+}
+.info-title .accent {
+  color: var(--pri);
+  font-weight: 800;
+}
+
+.lead-strong {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 20px 0;
+}
+
+ul {
+  margin-left: 20px;
+  line-height: 1.8;
+}
+
+/* ปุ่ม */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.btn-flat {
+  background: linear-gradient(90deg, var(--pri), var(--pri2));
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media(max-width: 768px){
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

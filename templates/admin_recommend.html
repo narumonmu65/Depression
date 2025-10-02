@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ editor_title or 'แก้ไขคำแนะนำ' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+  <style>
+    .editor-wrap{max-width:980px;margin:40px auto;background:#fff;border-radius:22px;
+      box-shadow:0 20px 50px rgba(124,58,237,.12);padding:26px}
+    .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+    .toolbar select,.toolbar input[type=color],.toolbar button{
+      border:1px solid #e9d5ff;border-radius:10px;padding:8px 10px;background:#faf5ff;cursor:pointer}
+    .toolbar button{font-weight:700}
+    #editor{min-height:360px;padding:18px;border:1px dashed #d8b4fe;border-radius:14px;background:#fcfbff}
+    .actions{display:flex;justify-content:center;gap:12px;margin-top:16px}
+    .btn{border:none;border-radius:999px;padding:12px 22px;font-weight:800;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,#7c3aed,#a78bfa);color:#fff}
+    .btn.ghost{background:#eee6ff;color:#4c1d95}
+    .history-wrap{max-width:980px;margin:22px auto;background:#fff;border-radius:16px;padding:18px}
+    .history-title{margin:0 0 12px}
+    .table-scroll{overflow:auto}
+    table.history-table{width:100%;border-collapse:collapse}
+    table.history-table th, table.history-table td{padding:10px 12px;border-bottom:1px solid #f1eaff;vertical-align:top}
+    td.preview{max-width:520px}
+  </style>
+</head>
+<body>
+
+<main class="editor-wrap">
+  <h1 style="text-align:center;margin:0 0 6px">{{ editor_title or "แก้ไขคำแนะนำ" }}</h1>
+  <p style="text-align:center;color:#6b7280;margin:0 0 18px">
+    จัดรูปแบบหัวข้อ สี ตัวหนา รายการ ฯลฯ แล้วกด “บันทึก”
+  </p>
+
+  <div class="toolbar">
+    <button type="button" onclick="cmd('formatBlock','H1')">H1</button>
+    <button type="button" onclick="cmd('formatBlock','H2')">H2</button>
+    <button type="button" onclick="cmd('formatBlock','P')">P</button>
+    <button type="button" onclick="cmd('bold')"><b>B</b></button>
+    <button type="button" onclick="cmd('italic')"><i>I</i></button>
+    <button type="button" onclick="cmd('underline')"><u>U</u></button>
+    <button type="button" onclick="cmd('insertUnorderedList')">• ลิสต์</button>
+    <button type="button" onclick="cmd('justifyLeft')">ซ้าย</button>
+    <button type="button" onclick="cmd('justifyCenter')">กึ่งกลาง</button>
+    <button type="button" onclick="cmd('justifyRight')">ขวา</button>
+    <select onchange="cmd('fontName', this.value)">
+      <option value="">ฟอนต์</option>
+      <option value="TH Sarabun New">TH Sarabun New</option>
+      <option value="Prompt">Prompt</option>
+      <option value="Noto Sans Thai">Noto Sans Thai</option>
+      <option value="Arial">Arial</option>
+    </select>
+    <select onchange="cmd('fontSize', this.value)">
+      <option value="">ขนาด</option>
+      <option value="2">เล็ก</option>
+      <option value="3">ปกติ</option>
+      <option value="4">ใหญ่</option>
+      <option value="5">ใหญ่มาก</option>
+    </select>
+    <label style="display:flex;align-items:center;gap:6px">
+      สีตัวอักษร <input type="color" onchange="cmd('foreColor', this.value)" value="#5b21b6">
+    </label>
+  </div>
+
+  <div id="editor" contenteditable="true">{{ recommend_text|safe }}</div>
+
+  <form method="post" onsubmit="return submitHTML()">
+    <textarea name="recommend_text" id="recommend_text" hidden></textarea>
+    <div class="actions">
+      <button class="btn primary" type="submit">บันทึก</button>
+      <a class="btn ghost" href="{{ url_for(back_to or 'admin') }}">กลับ</a>
+    </div>
+  </form>
+</main>
+
+<section class="history-wrap">
+  <h2 class="history-title">ประวัติการเปลี่ยนแปลง</h2>
+
+  {% if history and history|length %}
+  <div class="table-scroll">
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th style="width:140px;">วันที่/เวลา</th>
+          <th style="width:160px;">โดย</th>
+          <th>ตัวอย่างข้อความ</th>
+          <th style="width:120px;">ความยาว</th>
+          <th style="width:240px;">การกระทำ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for h in history %}
+        <tr>
+          <td>{{ h.created_at }}</td>
+          <td>{{ h.author or '-' }}</td>
+          <td class="preview">{{ h.preview }}</td>
+          <td>{{ h.length }} ตัวอักษร</td>
+          <td class="actions">
+  <form method="post"
+        action="{{ url_for('admin_recommend_restore', editor_key=editor_key, hid=h.id) }}"
+        onsubmit="return confirm('กู้คืนเวอร์ชันนี้เป็นค่าปัจจุบัน ?')">
+    <button class="btn primary btn-sm" type="submit">กู้คืน</button>
+  </form>
+</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <p class="muted">ยังไม่มีประวัติการเปลี่ยนแปลง</p>
+  {% endif %}
+</section>
+
+<script>
+  function cmd(command, value=null){
+    document.execCommand(command, false, value);
+    document.getElementById('editor').focus();
+  }
+  function submitHTML(){
+    const html = document.getElementById('editor').innerHTML.trim();
+    document.getElementById('recommend_text').value = html;
+    return true;
+  }
+</script>
+</body>
+</html>
